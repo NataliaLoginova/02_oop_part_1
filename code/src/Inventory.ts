@@ -11,7 +11,7 @@ export class Inventory {
         this.items.push(item);
     }
 
-    //public sort(): void;
+    public sort(): void;
     public sort(comparator?: ItemComparator): void {
         if (comparator) {
             this.items.sort(comparator.compare);
