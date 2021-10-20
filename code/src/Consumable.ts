@@ -23,17 +23,17 @@ export abstract class Consumable extends Item {
 
     public use(): string {
         if (this.isConsumed()) {
-            return `There is nothing left of the ${this.getName()} to consume.`;
+            return `There is nothing left of the ${this.name} to consume.`;
         } else if (!this.isConsumed() && this.spoiled) {
             const firstString = this.eat();
-            return `${firstString} \n You feel sick.`
+            return `${firstString}\nYou feel sick.`
         } else if (!this.consumed && !this.spoiled) {
             return this.eat();
         }
     }
 
     protected eat(): string {
-        return `You eat the ${this.getName()}`
+        return `You eat the ${this.name}`
     }
 
 }

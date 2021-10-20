@@ -1,71 +1,71 @@
 import { Comparable } from './Comparable';
 
 let id = 0;
-let counter = 0;
 
 export abstract class Item implements Comparable<Item> {
-    private id: number;
-    private name: string;
-    private value: number;
-    private weight: number;
+    private static counter = 0;
 
     constructor(name: string, value: number, weight: number) {
         this.id = ++id;
-        this.setName(name);
-        this.setValue(value);
-        this.setWeight(weight);
-        counter++;
+        this.name = name;
+        this.value = value;
+        this.weight = weight;
+        Item.counter++;
     }
 
     abstract use(): void;
 
     public get numberOfItems (): number {
-        return counter;
+        return Item.counter;
     }
 
-    public getId(): number {
+    public get id(): number {
         return this.id;
     }
 
-    public setValue(value: number): void {
+    public set id(id: number) {
+        this.id = id;
+    }
+
+    public get value(): number {
+       return this.value;
+    }
+
+    public set value(value: number) {
         this.value = value;
     }
 
-    public getValue(): number {
-        return this.value;
-    }
-
-    public getName(): string {
+    public get name(): string {
         return this.name;
     }
 
-    public setName(name: string): void {
+    public set name(name: string) {
         this.name = name;
     }
 
-    public getWeight(): number {
+    public get weight(): number {
         return this.weight;
     }
 
-    public setWeight(weight: number): void {
+    public set weight(weight: number) {
         this.weight = weight;
     }
 
     public static reset() {
-        counter = 0;
+        Item.counter = 0;
     }
 
     public compareTo(other: Item): number {
-        if (this.getValue() > other.getValue()) {
+        if (this.value > other.value) {
             return 1;
-        } else if (this.getValue() < other.getValue()) {
+        } else if (this.value < other.value) {
             return -1;
         } else {
-            this.getValue().toString().toLowerCase().localeCompare(other.getValue().toString().toLowerCase())
+            this.name.localeCompare(other.name, undefined, { sensitivity: "base" })
         }
     }
 
     public toString(): string {
-        return `${this.getName()} - Value: ${this.getValue()}, Weight: ${this.getWeight()}`;
+        return `${this.name} - Value: ${this.value}, Weight: ${this.weight}`;
     }
 }

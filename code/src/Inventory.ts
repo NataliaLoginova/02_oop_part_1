@@ -11,17 +11,16 @@ export class Inventory {
         this.items.push(item);
     }
 
-    public sort(): void;
     public sort(comparator?: ItemComparator): void {
         if (comparator) {
             this.items.sort(comparator.compare);
         } else {
-            this.items.sort((itemFirst, itemSecons) => itemFirst.getValue() - itemSecons.getValue());
+            this.items.sort((itemFirst, itemSecons) => itemFirst.value - itemSecons.value);
         }
     }
 
     public toString(): string {
-        return this.items.map(item => item.toString()).join(',');
+        return this.items.join(',');
     }
 
 }
